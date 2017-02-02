@@ -1,0 +1,16 @@
+* Validity check of dependencies noted in a metaparam.json against an
+  environments Puppetfile
+  metaparam.json should be a required parameter with no default
+
+  Also possible would be to find all metaparam.json's below the dirname
+  of the given Puppetfile, matching against those
+
+  On the other hand many keep their local clones of modules beside the
+  environment, which'd favor matching against found metaparams below the
+  current path
+
+* Building of .fixtures.yml for modules based on the metadata
+  I did something similar on my modulesync config[1], however having it
+  this way and called via a rake task might be favorable
+
+  [1]: https://github.com/ntnn/modulesync-cfg/blob/master/moduleroot/.fixtures.yml
