@@ -17,7 +17,7 @@ module Puppetfiler
         end
 
         desc 'fixture [puppetfile]', 'Create puppetlabs_spec_helper compatible .fixtures.yml from puppetfile'
-        def fixture(puppetfile)
+        def fixture(puppetfile = 'Puppetfile')
             puts Puppetfiler::Puppetfile(puppetfile).fixture
         end
 
