@@ -2,4 +2,4 @@
 
 require 'puppetfiler'
 
-Puppetfiler.start(ARGV)
+Puppetfiler::Puppetfile.start(ARGV)
