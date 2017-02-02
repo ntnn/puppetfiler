@@ -55,7 +55,7 @@ EOT
                 current = SemanticPuppet::Version.parse(version)
                 newest = Puppetfiler::Mod.newest(name)
 
-                if no neweset.eql?(current)
+                if not newest.eql?(current)
                     updates[name] = {
                         :current => current,
                         :newest  => newest,
