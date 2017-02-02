@@ -5,13 +5,13 @@ require 'puppetfiler/version'
 module Puppetfiler
     class CLI < Thor
         desc 'check [puppetfile]', 'Check forge for newer versions of used forge modules'
-        def check(puppetfile)
-            pf = Puppetfiler::Puppetfile(puppetfile)
-            format = "% -#{pf.maxlen}s\t%s\t%s"
+        def check(puppetfile = 'Puppetfile')
+            pf = Puppetfiler::Puppetfile.new(puppetfile)
+            format = "% -#{pf.maxlen_name}s  % -#{pf.maxlen_ver}s  %s"
 
-            puts sprintf(format, 'module', 'installed', 'newest')
+            puts sprintf(format, 'module', 'current', 'newest')
 
-            pf.updates do |name, hash|
+            pf.updates.each do |name, hash|
                 puts sprintf(format, name, hash[:current], hash[:newest])
             end
         end

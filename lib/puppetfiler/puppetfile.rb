@@ -6,8 +6,11 @@ module Puppetfiler
         def initialize(path = 'Puppetfile')
             @modules    = {}
             @repos      = {}
-            @maxlen     = 0
             @puppetfile = path
+
+            @maxlen_name = 0
+            @maxlen_ver  = 0
+
             # TODO heredocs are ugly, maybe ruby has a way to store them
             # elsewhere as .erb
             # Also omit forge_modules/repositories if the referring key is
@@ -37,8 +40,12 @@ EOT
             self.instance_eval(File.read(@puppetfile))
         end
 
-        def maxlen
-            @maxlen
+        def maxlen_name
+            @maxlen_name
+        end
+
+        def maxlen_ver
+            [@maxlen_ver, 'current'.length].max
         end
 
         def updates
@@ -74,7 +81,8 @@ EOT
             if arg.is_a?(String)
                 return if arg == 'latest'
                 @modules[name] = arg
-                @maxlen = name.length if name.length > @maxlen
+                @maxlen_name = name.length if name.length > @maxlen_name
+                @maxlen_ver  = arg.length if arg.length > @maxlen_ver
             else args.is_a?(Hash)
 
                 @repos[name] = {}
