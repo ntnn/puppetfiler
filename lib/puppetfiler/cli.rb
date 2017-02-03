@@ -17,8 +17,15 @@ module Puppetfiler
         end
 
         desc 'fixture [puppetfile]', 'Create puppetlabs_spec_helper compatible .fixtures.yml from puppetfile'
+        method_option :stdout, :aliases => '-o'
         def fixture(puppetfile = 'Puppetfile')
-            puts Puppetfiler::Puppetfile(puppetfile).fixture
+            f = Puppetfiler::Puppetfile.new(puppetfile).fixture
+
+            if options[:stdout]
+                puts f
+            else
+                File.write('.fixtures.yml', f)
+            end
         end
 
         desc 'version', 'Output version'
