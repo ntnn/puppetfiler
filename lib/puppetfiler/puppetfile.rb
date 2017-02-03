@@ -1,4 +1,3 @@
-require 'erb'
 require 'puppetfiler/mod'
 
 module Puppetfiler
@@ -10,27 +9,6 @@ module Puppetfiler
 
             @maxlen_name = 0
             @maxlen_ver  = 0
-
-            # TODO heredocs are ugly, maybe ruby has a way to store them
-            # elsewhere as .erb
-            # Also omit forge_modules/repositories if the referring key is
-            # empty
-            @fixture_template = <<-EOT
----
-fixtures:
-  forge_modules:
-<% @modules.each do |name, version| -%>
-    <%= name.split('/')[1] %>:
-      repo: <%= name %>
-      ref: <%= version %>
-<% end -%>
-  repositories:
-<% @repos.each do |name, hash| -%>
-    <%= name %>:
-      repo: <%= hash[:uri] %>
-      ref: <%= hash[:ref] %>
-<% end -%>
-EOT
 
             self.evaluate
         end
@@ -67,7 +45,32 @@ EOT
         end
 
         def fixture
-            ERB.new(@fixture_template, nil, '-').result(binding)
+            fixtures = {
+                'forge_modules' => {},
+                'repositories'  => {},
+            }
+
+            @modules.each do |name, version|
+                fixtures['forge_modules'][name.split('/')[1]] = {
+                    'repo' => name,
+                    'ref'  => version,
+                }
+            end
+
+            @repos.each do |name, hash|
+                if hash.has_key?(:ref)
+                    content = {
+                        'repo' => hash[:uri],
+                        'ref'  => hash[:ref],
+                    }
+                else
+                    content = hash[:uri]
+                end
+
+                fixtures['repositories'][name] = content
+            end
+
+            fixtures
         end
 
         private

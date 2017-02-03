@@ -1,4 +1,5 @@
 require 'thor'
+require 'yaml'
 require 'puppetfiler/puppetfile'
 require 'puppetfiler/version'
 
@@ -19,7 +20,7 @@ module Puppetfiler
         desc 'fixture [puppetfile]', 'Create puppetlabs_spec_helper compatible .fixtures.yml from puppetfile'
         method_option :stdout, :aliases => '-o'
         def fixture(puppetfile = 'Puppetfile')
-            f = Puppetfiler::Puppetfile.new(puppetfile).fixture
+            f = Puppetfiler::Puppetfile.new(puppetfile).fixture.to_yaml
 
             if options[:stdout]
                 puts f
