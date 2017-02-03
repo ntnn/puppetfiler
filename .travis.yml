@@ -1,8 +1,14 @@
----
 sudo: false
 language: ruby
 rvm:
   - 2.1
   - 2.2
-
 before_install: gem install bundler
+deploy:
+  provider: rubygems
+  api_key:
+    secure: ow3iUH0yPcp6W9Gd3sUE3KDCpt/n+TpYQlJqnvEXPqPY/3uY1Lya+GXadBUJJmuJcwTY0yPvG3pOBXzqoeUxeCD/iCMaMOtmzHNyX8Jun3s0o235uxBumQjJm8yhgSAGGJynY1jp8m5Z45GM7SiBSfwj3S5/eOepY+Dw0PqU4PD0iEqFK2zOKsEH9uAyywkA3zIhl2wJ+LvPyXRoBLku1+8VDdOSa++w8YtpHOYb14qdfNbCRKn9dR+13nVb4cqq7cHppcUV70lk0n3mgP7bo28kjXZh5Dir9EvMt3/dqpRlWD6Hmw13wcMxPfvMN2/VbEvJl8aTOVXLcEbRlUx56vd7AaOSkkdXVqK6koC9xR8GZBhjUoKx9QPS0k2wETXJVA5Bhy7MCf4g26Ao7pfA1HZW6iCE4CQYXBk5oaifPqaTyBUuDqolgqfte+PwkaaL/Mv2uh3As/kb8twHb7HarL+Hc1jMXDmDlLadopovT7Tab6GYGYOvqeaH79NfNlY+J8Q3f14oZAEEwvNU2afQiGnBpB0ye+IqvMn7CFmMsXiLLKjtI1CE06fximPRNbVVP1VGH7G1D/jgArU4BHRYgAZqc/dmhJemEvFjla+7Rm3FsJFXlaK+eS3hUrbMZLzFdsPcQB04+SAcJrBsSkd6cr8t+PQk04gT9cAElkt81J4=
+  gem: puppetfiler
+  on:
+    tags: true
+    repo: ntnn/puppetfiler
