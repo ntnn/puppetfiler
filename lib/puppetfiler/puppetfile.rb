@@ -2,6 +2,11 @@ require 'puppetfiler/mod'
 
 module Puppetfiler
     class Puppetfile
+        attr :modules
+        attr :repos
+        attr :puppetfile
+        attr :maxlen_name
+
         def initialize(path = 'Puppetfile')
             @modules    = {}
             @repos      = {}
@@ -16,10 +21,6 @@ module Puppetfiler
         def evaluate
             # TODO add error handling if target doesn't exist
             self.instance_eval(File.read(@puppetfile))
-        end
-
-        def maxlen_name
-            @maxlen_name
         end
 
         def maxlen_ver
