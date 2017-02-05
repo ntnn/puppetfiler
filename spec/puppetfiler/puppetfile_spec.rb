@@ -16,7 +16,11 @@ describe Puppetfiler::Puppetfile do
             {
                 'goscript' => {
                     :uri => 'https://github.com/ntnn/puppet-goscript',
-                }
+                },
+                'inifile'  => {
+                    :uri => 'https://github.com/puppetlabs/puppetlabs-inifile',
+                    :ref => '1.6.0',
+                },
             }
         }
 
@@ -59,7 +63,11 @@ describe Puppetfiler::Puppetfile do
                             },
                         },
                         'repositories'  => {
-                            'goscript'  => 'https://github.com/ntnn/puppet-goscript',
+                            'goscript' => 'https://github.com/ntnn/puppet-goscript',
+                            'inifile'  => {
+                                'repo' => 'https://github.com/puppetlabs/puppetlabs-inifile',
+                                'ref'  => '1.6.0',
+                            },
                         },
                     }
                 )
