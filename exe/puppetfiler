@@ -29,6 +29,6 @@ if ENV['COVERAGE']
     end
 end
 
-require 'puppetfiler'
+require 'puppetfiler/cli'
 
 Puppetfiler::CLI.start

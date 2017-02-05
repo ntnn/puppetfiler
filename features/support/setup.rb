@@ -5,4 +5,3 @@ Before do
 end
 
 require 'aruba/cucumber'
-require 'puppetfiler/version'
