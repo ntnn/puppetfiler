@@ -55,3 +55,39 @@ Puppetfile.
 	  ref: 1.8.1
 
 .. _puppetlabs_spec_helper: https://github.com/puppetlabs/puppetlabs_spec_helper
+
+Gerating .fixture.yml when executing rake tasks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: ruby
+
+    require 'puppetfiler'
+
+    desc 'Generate .fixtures.yml'
+    task :fixtures do
+        pf = Puppetfiler::Puppetfile.new('Puppetfile')
+        fixtures = pf.fixture(
+            {
+                'forge_modules' => {
+                    /.*/ => {
+                        'flags' => '--module_repository https://inhouse.forge.lan/',
+                    },
+                },
+            },
+        )
+        File.write('.fixtures.yml', fixtures.to_yaml)
+    end
+
+    task :spec => [:fixtures]
+    task :test do
+        [:metadata_lint, :lint, :validate, :spec].each do |test|
+            Rake::Task[test].invoke
+        end
+    end
+
+Allowed keys in the passed modifiers are 'forge_modules' and
+'repositories', which are hashes with strings or regular expressions as
+keys and hashes or strings as values.
+
+Also see the rspec test ``takes a hash with pattern matches and returns
+fixtures as a hash`` in ``spec/puppetfiler/puppetfile_spec.rb``.
