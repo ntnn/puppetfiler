@@ -19,8 +19,18 @@ module Puppetfiler
         end
 
         def evaluate
-            # TODO add error handling if target doesn't exist
-            self.instance_eval(File.read(@puppetfile))
+            if not File.exists?(@puppetfile)
+                STDERR.puts "Puppetfile not found at path '#{@puppetfile}'"
+                return nil
+            end
+
+            begin
+                self.instance_eval(File.read(@puppetfile))
+            rescue SyntaxError => error
+                STDERR.puts "Puppetfile at path '#{@puppetfile}' is invalid:"
+                STDERR.puts error
+                return nil
+            end
         end
 
         def maxlen_ver

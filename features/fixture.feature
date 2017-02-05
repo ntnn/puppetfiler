@@ -11,7 +11,7 @@ Feature: fixture
     Scenario: No puppetfile in pwd and none passed
         Given a file named "Puppetfile" does not exist
         When I run `puppetfiler fixture`
-        Then the output should contain "No Puppetfile in current directory found"
+        Then the output should contain "Puppetfile not found at path 'Puppetfile'"
 
     Scenario: Puppetfile in pwd and none passed printing to output
         When I run `puppetfiler fixture -o`
