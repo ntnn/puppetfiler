@@ -1,3 +1,13 @@
+require 'simplecov'
+require 'simplecov-console'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::Console,
+]
+
+SimpleCov.start
+
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require 'puppetfiler'
 require 'rspec/expectations'
