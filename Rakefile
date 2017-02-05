@@ -10,6 +10,16 @@ Cucumber::Rake::Task.new(:features) do |t|
 end
 
 task :default do
+    require 'simplecov'
+    require 'simplecov-console'
+
+    SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::Console,
+    ]
+
+    SimpleCov.start
+
     %i{spec features}.each do |task|
         Rake::Task[task].invoke
     end

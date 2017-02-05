@@ -1,11 +1,6 @@
 require 'simplecov'
-require 'simplecov-console'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  SimpleCov::Formatter::Console,
-]
-
+SimpleCov.command_name 'rspec'
 SimpleCov.start
 
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
