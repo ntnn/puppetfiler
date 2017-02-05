@@ -5,7 +5,7 @@ if ENV['COVERAGE']
     require 'simplecov'
 
     # As described in the issue, every process must have an unique name:
-    SimpleCov.command_name 'cucumber'
+    SimpleCov.command_name "binary #{Process.pid}"
 
     # When running with aruba simplecov was using /tmp/aruba as the root folder.
     # This is to force using the project folder
@@ -23,7 +23,6 @@ if ENV['COVERAGE']
 
         # Ignoring test folders and tmp for Aruba
         add_filter '/spec/'
-        add_filter '/test/'
         add_filter '/features/'
         add_filter '/tmp/'
     end
