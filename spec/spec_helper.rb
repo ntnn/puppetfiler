@@ -9,20 +9,27 @@ require 'rspec/expectations'
 
 RSpec.configure do |config|
     config.before(:each) do
-        @mod = double(
+        @stdlib = double(
             'PuppetForge::Module',
-            :current_release => double(
-                'PuppetForge::Release',
-                :version => '4.15.0'
-            )
+            :current_release => double('PuppetForge::Release', :version => '4.15.0'),
+            :releases => [
+                double('PuppetForge::Release', :version => '4.15.0'),
+                double('PuppetForge::Release', :version => '4.14.0'),
+            ],
         )
 
-        allow(PuppetForge::Module)
-            .to receive(:find)
-            .and_return(@mod)
+        @extlib = double(
+            'PuppetForge::Module',
+            :current_release => double('PuppetForge::Release', :version => '1.1.0'),
+            :releases => [
+                double('PuppetForge::Release', :version => '1.1.0'),
+                double('PuppetForge::Release', :version => '1.0.0'),
+            ],
+        )
 
         @modules = {
-            'puppetlabs/stdlib' => '4.13.1'
+            'puppetlabs/stdlib' => '4.13.1',
+            'puppet/extlib' => '1.1.0',
         }
 
         @repos = {
