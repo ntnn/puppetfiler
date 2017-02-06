@@ -55,7 +55,7 @@ module Puppetfiler
         def parse(content)
             json = JSON.load(content)
 
-            if not json.has_key?('dependencies')
+            if not json.has_key?('dependencies') or json['dependencies'].eql?([])
                 STDERR.puts "No dependencies in file '#{@path}' found"
                 return nil
             end
