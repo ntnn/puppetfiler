@@ -20,5 +20,19 @@ RSpec.configure do |config|
         allow(PuppetForge::Module)
             .to receive(:find)
             .and_return(@mod)
+
+        @modules = {
+            'puppetlabs/stdlib' => '4.13.1'
+        }
+
+        @repos = {
+            'goscript' => {
+                :uri => 'https://github.com/ntnn/puppet-goscript',
+            },
+            'inifile'  => {
+                :uri => 'https://github.com/puppetlabs/puppetlabs-inifile',
+                :ref => '1.6.0',
+            },
+        }
     end
 end
