@@ -6,7 +6,7 @@ describe Puppetfiler::Metadata do
         Puppetfiler::Metadata.new('./data/simple_metadata.json')
     }
 
-    describe 'instance variables' do
+    describe 'initialization / instance variables' do
         it 'sets the path' do
             expect(md.path).to eq('./data/simple_metadata.json')
         end
