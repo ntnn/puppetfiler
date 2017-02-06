@@ -26,7 +26,7 @@ module Puppetfiler
         attr :path
         def initialize(path = 'metadata.json')
             @path = path
-            @dependencies = []
+            @dependencies = {}
 
             parse File.read(@path)
         end
@@ -61,7 +61,7 @@ module Puppetfiler
             end
 
             json['dependencies'].each do |hash|
-                @dependencies << Dependency.new(hash['name'], hash['version_requirement'])
+                @dependencies[hash['name']] = Dependency.new(hash['name'], hash['version_requirement']).version
             end
         end
     end
