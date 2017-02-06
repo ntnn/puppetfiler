@@ -4,27 +4,6 @@ require 'semantic_puppet'
 
 module Puppetfiler
     class Metadata
-        class Dependency
-            # TODO make Puppetfilter::Mod a proper class with
-            # these settings to allow a consistent workflow between
-            # puppetfile/metadata
-            attr :name
-            attr :version_requirement
-
-            def initialize(name, version_requirement)
-                @name = name
-                @version_requirement = SemanticPuppet::VersionRange.parse(version_requirement)
-            end
-
-            def eql?(other)
-                return true if @name.eql?(other.name) and @version_requirement.eql?(other.version_requirement)
-            end
-
-            def version
-                return Puppetfiler::Mod.newest(@name)
-            end
-        end
-
         attr :dependencies
         attr :path
         def initialize(path = 'metadata.json')
@@ -69,7 +48,7 @@ module Puppetfiler
             end
 
             json['dependencies'].each do |hash|
-                @dependencies[hash['name']] = Dependency.new(hash['name'], hash['version_requirement']).version
+                @dependencies[hash['name']] = Puppetfiler::Mod.new(hash)
             end
         end
     end

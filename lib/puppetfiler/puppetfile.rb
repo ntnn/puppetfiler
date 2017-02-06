@@ -69,7 +69,9 @@ module Puppetfiler
 
             if arg.is_a?(String)
                 return if arg == 'latest'
-                @modules[name] = arg
+
+                @modules[name] = Puppetfiler::Mod.new(:name => name, :version => arg)
+
                 @maxlen_name = name.length if name.length > @maxlen_name
                 @maxlen_ver  = arg.length if arg.length > @maxlen_ver
             else args.is_a?(Hash)
