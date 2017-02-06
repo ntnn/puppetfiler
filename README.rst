@@ -6,6 +6,9 @@ Puppetfiler
 .. image:: https://codeclimate.com/github/ntnn/puppetfiler/badges/gpa.svg
     :target: https://codeclimate.com/github/ntnn/puppetfiler
     :alt: Code Climate
+.. image:: https://codeclimate.com/github/ntnn/puppetfiler/badges/coverage.svg
+   :target: https://codeclimate.com/github/ntnn/puppetfiler/coverage
+   :alt: Test Coverage
 
 Gem for miscellaneous actions based on Puppetfiles.
 
