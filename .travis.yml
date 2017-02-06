@@ -12,3 +12,6 @@ deploy:
   on:
     tags: true
     repo: ntnn/puppetfiler
+addons:
+  code_climate:
+    repo_token: 0812dfcba3b90af823e357c1d5eea72c465b27f3e1c1983c3bc56f2210bb4ff3
