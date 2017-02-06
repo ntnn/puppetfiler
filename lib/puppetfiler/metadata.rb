@@ -51,6 +51,10 @@ module Puppetfiler
             # to fit the needs,
         end
 
+        def eql?(other)
+            @dependencies.eql?(other.dependencies)
+        end
+
         private
         def parse(content)
             json = JSON.load(content)
