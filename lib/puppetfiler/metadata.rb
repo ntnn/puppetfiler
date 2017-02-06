@@ -5,6 +5,9 @@ require 'semantic_puppet'
 module Puppetfiler
     class Metadata
         class Dependency
+            # TODO make Puppetfilter::Mod a proper class with
+            # these settings to allow a consistent workflow between
+            # puppetfile/metadata
             attr :name
             attr :version_requirement
 
