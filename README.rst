@@ -1,5 +1,8 @@
 Puppetfiler
 ===========
+.. image:: https://travis-ci.org/ntnn/puppetfiler.svg?branch=master
+    :target: https://travis-ci.org/ntnn/puppetfiler
+    :alt: Travis CI
 
 Gem for miscellaneous actions based on Puppetfiles.
 
