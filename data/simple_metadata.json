@@ -1,0 +1,16 @@
+{
+    "name": "example-module",
+    "version": "0.1.0",
+    "author": "Some Author",
+    "summary": "Examplary summary",
+    "license": "MIT",
+    "source": "https://github.com/ntnn/puppetfiler",
+    "project_page": "https://github.com/ntnn/puppetfiler",
+    "issues_url": "https://github.com/ntnn/puppetfiler/issues",
+    "dependencies": [
+        {
+            "name": "puppetlabs/stdlib",
+            "version_requirement": ">= 4.13.0 < 5.0.0"
+        }
+    ]
+}
