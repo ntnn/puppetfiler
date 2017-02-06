@@ -9,7 +9,7 @@ module Puppetfiler
             attr :version_requirement
 
             def initialize(name, version_requirement)
-                @path = name
+                @name = name
                 @version_requirement = SemanticPuppet::VersionRange.parse(version_requirement)
             end
 
