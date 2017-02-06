@@ -3,6 +3,9 @@ Puppetfiler
 .. image:: https://travis-ci.org/ntnn/puppetfiler.svg?branch=master
     :target: https://travis-ci.org/ntnn/puppetfiler
     :alt: Travis CI
+.. image:: https://codeclimate.com/github/ntnn/puppetfiler/badges/gpa.svg
+    :target: https://codeclimate.com/github/ntnn/puppetfiler
+    :alt: Code Climate
 
 Gem for miscellaneous actions based on Puppetfiles.
 
