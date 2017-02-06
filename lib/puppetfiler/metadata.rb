@@ -16,6 +16,10 @@ module Puppetfiler
             def eql?(other)
                 return true if @name.eql?(other.name) and @version_requirement.eql?(other.version_requirement)
             end
+
+            def version
+                return Puppetfiler::Mod.newest(@name)
+            end
         end
 
         attr :dependencies
