@@ -67,5 +67,31 @@ describe Puppetfiler do
                     }
                 )
         end
+
+        it 'turns a string uri into a hash upon merge' do
+            patterns = {
+                'repositories' => {
+                    /.*/ => {
+                        'flags' => '--verbose',
+                    },
+                },
+            }
+
+            repos = { 'goscript' => @repos['goscript'] }
+
+            expect(Puppetfiler.fixture({}, repos, patterns))
+                .to eql(
+                    {
+                        'fixtures' => {
+                            'repositories' => {
+                                'goscript' => {
+                                    'repo' => 'https://github.com/ntnn/puppet-goscript',
+                                    'flags' => '--verbose',
+                                },
+                            },
+                        },
+                    }
+                )
+        end
     end
 end

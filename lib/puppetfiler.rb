@@ -6,12 +6,9 @@ require 'puppetfiler/version'
 
 module Puppetfiler
     def self.fixture(modules, repos, modifiers = {})
-        fixtures = {
-            'forge_modules' => {},
-            'repositories'  => {},
-        }
+        fixtures = {}
 
-        fixtures.each do |k, v|
+        %w{forge_modules repositories}.each do |k|
             modifiers[k] = {} if not modifiers.has_key?(k)
         end
 
@@ -27,6 +24,7 @@ module Puppetfiler
                 value.merge!(merger) if name =~ /#{modifier}/
             end
 
+            fixtures['forge_modules'] = {} if not fixtures.has_key?('forge_modules')
             fixtures['forge_modules'][short] = value
         end
 
@@ -58,6 +56,7 @@ module Puppetfiler
                 end
             end
 
+            fixtures['repositories'] = {} if not fixtures.has_key?('repositories')
             fixtures['repositories'][name] = content
         end
 
