@@ -32,6 +32,7 @@ module Puppetfiler
         end
 
         def fixture(modifiers = {})
+            Puppetfiler.fixture(@dependencies, {}, modifiers)
             # TODO: Move fixture methdod out of puppetfile class to
             # parent class
             #
