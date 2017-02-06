@@ -111,7 +111,7 @@ module Puppetfiler
                 fixtures['repositories'][name] = content
             end
 
-            fixtures
+            { 'fixtures' => fixtures }
         end
 
         private

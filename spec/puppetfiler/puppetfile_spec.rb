@@ -60,17 +60,19 @@ describe Puppetfiler::Puppetfile do
             expect(pf.fixture)
                 .to eql(
                     {
-                        'forge_modules' => {
-                            'stdlib' => {
-                                'repo' => 'puppetlabs/stdlib',
-                                'ref'  => '4.13.1',
+                        'fixtures' => {
+                            'forge_modules' => {
+                                'stdlib' => {
+                                    'repo' => 'puppetlabs/stdlib',
+                                    'ref'  => '4.13.1',
+                                },
                             },
-                        },
-                        'repositories'  => {
-                            'goscript' => 'https://github.com/ntnn/puppet-goscript',
-                            'inifile'  => {
-                                'repo' => 'https://github.com/puppetlabs/puppetlabs-inifile',
-                                'ref'  => '1.6.0',
+                            'repositories'  => {
+                                'goscript' => 'https://github.com/ntnn/puppet-goscript',
+                                'inifile'  => {
+                                    'repo' => 'https://github.com/puppetlabs/puppetlabs-inifile',
+                                    'ref'  => '1.6.0',
+                                },
                             },
                         },
                     }
@@ -95,19 +97,21 @@ describe Puppetfiler::Puppetfile do
             expect(pf.fixture(patterns))
                 .to eql(
                     {
-                        'forge_modules' => {
-                            'stdlib' => {
-                                'repo'  => 'puppetlabs/stdlib',
-                                'ref'   => '4.13.1',
-                                'flags' => '--module_repository https://inhouse.forge.lan/',
+                        'fixtures' => {
+                            'forge_modules' => {
+                                'stdlib' => {
+                                    'repo'  => 'puppetlabs/stdlib',
+                                    'ref'   => '4.13.1',
+                                    'flags' => '--module_repository https://inhouse.forge.lan/',
+                                },
                             },
-                        },
-                        'repositories'  => {
-                            'goscript' => 'https://alternative.uri/',
-                            'inifile'  => {
-                                'repo'  => 'https://github.com/puppetlabs/puppetlabs-inifile',
-                                'ref'   => '1.6.0',
-                                'flags' => '--verbose',
+                            'repositories'  => {
+                                'goscript' => 'https://alternative.uri/',
+                                'inifile'  => {
+                                    'repo'  => 'https://github.com/puppetlabs/puppetlabs-inifile',
+                                    'ref'   => '1.6.0',
+                                    'flags' => '--verbose',
+                                },
                             },
                         },
                     }

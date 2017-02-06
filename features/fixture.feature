@@ -35,13 +35,14 @@ Feature: fixture
         Then a file named ".fixtures.yml" should contain:
         """
         ---
-        forge_modules:
-          stdlib:
-            repo: puppetlabs/stdlib
-            ref: 4.13.1
-        repositories:
-          goscript: https://github.com/ntnn/puppet-goscript
-          inifile:
-            repo: https://github.com/puppetlabs/puppetlabs-inifile
-            ref: 1.6.0
+        fixtures:
+          forge_modules:
+            stdlib:
+              repo: puppetlabs/stdlib
+              ref: 4.13.1
+          repositories:
+            goscript: https://github.com/ntnn/puppet-goscript
+            inifile:
+              repo: https://github.com/puppetlabs/puppetlabs-inifile
+              ref: 1.6.0
         """
