@@ -151,7 +151,7 @@ describe Puppetfiler::Mod do
                 let(:mod) { Puppetfiler::Mod.new(hash[:mod]) }
                 it { expect(mod.valid_versions).to_not be nil }
                 it { expect(mod.valid_versions.count).to eql(hash[:eql].count) }
-                it { expect(mod.valid_versions).to eql(hash[:eql]) }
+                it { expect(mod.valid_versions).to match_array(hash[:eql]) }
             end
         end
     end
