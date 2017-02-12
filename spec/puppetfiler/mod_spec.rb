@@ -143,7 +143,7 @@ describe Puppetfiler::Mod do
                 :mod => { :name => 'puppetlabs/stdlib', :range => '>= 4.13.0 < 5.0.0' },
                 :eql => [
                     SemanticPuppet::Version.parse('4.15.0'),
-                    SemanticPuppet::Version.parse('4.13.0'),
+                    SemanticPuppet::Version.parse('4.14.0'),
                 ],
             },
         }.each do |descr, hash|
