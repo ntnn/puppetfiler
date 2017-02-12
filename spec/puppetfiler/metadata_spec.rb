@@ -11,7 +11,10 @@ describe Puppetfiler::Metadata do
             expect(md.dependencies)
                 .to eql(
                     {
-                        'puppetlabs/stdlib' => Puppetfiler::Metadata::Dependency.new('puppetlabs/stdlib', '>= 4.13.0 < 5.0.0').version,
+                        'puppetlabs/stdlib' => Puppetfiler::Mod.new(
+                            :name => 'puppetlabs/stdlib',
+                            :range => SemanticPuppet::VersionRange.parse('>= 4.13.0 < 5.0.0'),
+                        )
                     }
                 )
         end
