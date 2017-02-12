@@ -25,7 +25,7 @@ module Puppetfiler
             json = JSON.load(target)
 
             if not json.has_key?('dependencies') or json['dependencies'].eql?([])
-                STDERR.puts "No dependencies in file '#{@path}' found"
+                warn 'No dependencies found'
                 return nil
             end
 

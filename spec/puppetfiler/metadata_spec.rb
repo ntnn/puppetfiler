@@ -25,7 +25,7 @@ describe Puppetfiler::Metadata do
         }.each do |mess, file|
             it "prints a message to stderr on #{mess} dependencies" do
                 expect { Puppetfiler::Metadata.new(File.new(file)) }
-                    .to output('No dependencies found').to_stderr
+                    .to output(/No dependencies found/).to_stderr
             end
         end
     end
