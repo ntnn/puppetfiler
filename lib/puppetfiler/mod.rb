@@ -8,7 +8,8 @@ module Puppetfiler
         attr :range
 
         def initialize(*args)
-            args = args[0]
+            require 'hashie'
+            args = Hashie.symbolize_keys(args[0])
 
             raise "Names with dashes are disallowed: #{args[:name]}" if /-/.match(args[:name])
 
