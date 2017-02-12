@@ -20,6 +20,9 @@ RSpec.configure do |config|
                 double('PuppetForge::Release', :version => '4.14.0'),
             ],
         )
+        allow(PuppetForge::Module)
+            .to receive(:find)
+            .and_return(@stdlib)
 
         @extlib = double(
             'PuppetForge::Module',

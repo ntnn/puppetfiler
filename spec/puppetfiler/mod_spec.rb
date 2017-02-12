@@ -4,12 +4,6 @@ require 'semantic_puppet'
 require 'puppetfiler/mod'
 
 describe Puppetfiler::Mod do
-    before(:each) do
-        allow(PuppetForge::Module)
-            .to receive(:find)
-            .and_return(@stdlib)
-    end
-
     let!(:mod) { Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib') }
 
     describe 'instance variables' do
