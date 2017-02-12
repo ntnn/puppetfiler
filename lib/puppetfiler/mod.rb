@@ -20,7 +20,13 @@ module Puppetfiler
 
             @range = nil
             [:range, 'range', 'version_requirement'].each do |v|
-                @range = SemanticPuppet::VersionRange.parse(args[v]) if args.has_key?(v)
+                if args.has_key?(v)
+                    if not args[v].is_a?(SemanticPuppet::VersionRange)
+                        args[v] = SemanticPuppet::VersionRange.parse(args[v])
+                    end
+
+                    @range = args[v]
+                end
             end
 
             @version = nil
