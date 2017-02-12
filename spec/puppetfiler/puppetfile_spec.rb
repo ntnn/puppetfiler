@@ -7,7 +7,11 @@ describe Puppetfiler::Puppetfile do
 
     describe 'instance variables' do
         it 'parses forge modules' do
-            expect(pf.modules).to eql(@modules)
+            expect(pf.modules).to eql(
+                {
+                    'puppetlabs/stdlib' => Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib', :version => '4.13.1'),
+                }
+            )
         end
 
         it 'parses vcs modules' do

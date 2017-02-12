@@ -1,13 +1,28 @@
 require 'spec_helper'
 
 describe Puppetfiler do
+    let!(:modules) {
+        mods = {}
+        {
+            'puppetlabs/stdlib' => '4.13.1',
+        }.each do |name, version|
+            mods[name] = Puppetfiler::Mod.new(
+                :name    => name,
+                :version => version
+            )
+        end
+
+        return mods
+    }
+
+
     it 'has a version number' do
         expect(Puppetfiler::VERSION).not_to be nil
     end
 
     describe '#fixture' do
         it 'returns fixtures as a hash' do
-            expect(Puppetfiler.fixture(@modules, @repos))
+            expect(Puppetfiler.fixture(modules, @repos))
                 .to eql(
                     {
                         'fixtures' => {
@@ -44,7 +59,7 @@ describe Puppetfiler do
                 },
             }
 
-            expect(Puppetfiler.fixture(@modules, @repos, patterns))
+            expect(Puppetfiler.fixture(modules, @repos, patterns))
                 .to eql(
                     {
                         'fixtures' => {
