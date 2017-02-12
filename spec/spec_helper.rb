@@ -1,4 +1,7 @@
 require 'simplecov'
+require 'webmock/rspec'
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 SimpleCov.command_name 'rspec'
 SimpleCov.start
