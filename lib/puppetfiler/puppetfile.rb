@@ -25,6 +25,9 @@ module Puppetfiler
             end
 
             begin
+                # TODO similar to Metadata, allow IO objects like File,
+                # string or similar to be passed in instead of expecting
+                # a path
                 self.instance_eval(File.read(@puppetfile))
             rescue SyntaxError => error
                 STDERR.puts "Puppetfile at path '#{@puppetfile}' is invalid:"
