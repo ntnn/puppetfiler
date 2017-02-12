@@ -40,9 +40,9 @@ module Puppetfiler
         def updates
             updates = {}
 
-            @modules.each do |name, version|
-                current = SemanticPuppet::Version.parse(version)
-                newest = Puppetfiler::Mod.newest(name)
+            @modules.each do |name, mod|
+                current = mod.version
+                newest = mod.latest
 
                 if not newest.eql?(current)
                     updates[name] = {

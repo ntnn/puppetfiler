@@ -12,11 +12,11 @@ module Puppetfiler
             modifiers[k] = {} if not modifiers.has_key?(k)
         end
 
-        modules.each do |name, version|
+        modules.each do |name, mod|
             short = name.split('/')[1]
             value = {
                 'repo' => name,
-                'ref'  => version,
+                'ref'  => mod.version.to_s,
             }
 
             modifiers['forge_modules'].each do |modifier, merger|
