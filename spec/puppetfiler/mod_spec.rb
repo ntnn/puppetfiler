@@ -136,11 +136,11 @@ describe Puppetfiler::Mod do
     describe '#valid_versions' do
         {
             'no range' => {
-                :mod => Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib'),
+                :mod => { :name => 'puppetlabs/stdlib' },
                 :eql => [],
             },
             'with range' => {
-                :mod => Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib', :range => '>= 4.13.0 < 5.0.0'),
+                :mod => { :name => 'puppetlabs/stdlib', :range => '>= 4.13.0 < 5.0.0' },
                 :eql => [
                     SemanticPuppet::Version.parse('4.15.0'),
                     SemanticPuppet::Version.parse('4.13.0'),
@@ -148,10 +148,10 @@ describe Puppetfiler::Mod do
             },
         }.each do |descr, hash|
             context descr do
-                let(:mod) { hash[:mod] }
+                let(:mod) { Puppetfiler::Mod.new(hash[:mod]) }
                 it { expect(mod.valid_versions).to_not be nil }
                 it { expect(mod.valid_versions.count).to eql(hash[:eql].count) }
-                it { expect(mod.valid_versions).to eq(hash[:eql]) }
+                it { expect(mod.valid_versions).to eql(hash[:eql]) }
             end
         end
     end
@@ -159,16 +159,16 @@ describe Puppetfiler::Mod do
     describe '#latest_valid' do
         {
             'no range' => {
-                :mod => Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib'),
+                :mod => { :name => 'puppetlabs/stdlib' },
                 :eql => SemanticPuppet::Version.parse('4.15.0'),
             },
             'with range' => {
-                :mod => Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib', :range => '>= 4.13.0 < 5.0.0'),
+                :mod => { :name => 'puppetlabs/stdlib', :range => '>= 4.13.0 < 5.0.0' },
                 :eql => SemanticPuppet::Version.parse('4.15.0'),
             },
         }.each do |descr, hash|
             context descr do
-                let(:mod) { hash[:mod] }
+                let(:mod) { Puppetfiler::Mod.new(hash[:mod]) }
                 it { expect(mod.latest_valid).to_not be nil }
                 it { expect(mod.latest_valid).to eql(hash[:eql]) }
             end
@@ -178,38 +178,38 @@ describe Puppetfiler::Mod do
     describe '#version_valid' do
         {
             'no range set' => {
-                :mod    => Puppetfiler::Mod.new(:name => 'puppetlabs/stdlib'),
+                :mod    => { :name => 'puppetlabs/stdlib' },
                 :params => [],
                 :eql    => false,
             },
             'correct range and version set' => {
-                :mod    => Puppetfiler::Mod.new(
+                :mod    => {
                     :name    => 'puppetlabs/stdlib',
                     :range   => '>= 4.13.0 < 5.0.0',
                     :version => '4.15.0',
-                ),
+                },
                 :params => [],
                 :eql    => true,
             },
             'correct range set and version passed' => {
-                :mod    => Puppetfiler::Mod.new(
+                :mod    => {
                     :name    => 'puppetlabs/stdlib',
                     :range   => '>= 4.13.0 < 5.0.0',
-                ),
+                },
                 :params => ['4.15.0'],
                 :eql    => true,
             },
             'range set and passed version out of bounds' => {
-                :mod    => Puppetfiler::Mod.new(
+                :mod    => {
                     :name    => 'puppetlabs/stdlib',
                     :range   => '>= 4.13.0 < 5.0.0',
-                ),
+                },
                 :params => ['5.15.0'],
                 :eql    => false,
             },
         }.each do |descr, hash|
             context "should return #{hash[:eql]} on #{descr}" do
-                let(:mod) { hash[:mod] }
+                let(:mod) { Puppetfiler::Mod.new(hash[:mod]) }
                 it { expect(mod.version_valid(*hash[:params])).to_not be nil }
                 it { expect(mod.version_valid(*hash[:params])).to eql(hash[:eql]) }
             end
