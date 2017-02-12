@@ -6,11 +6,10 @@ module Puppetfiler
     class Metadata
         attr :dependencies
         attr :path
-        def initialize(path = 'metadata.json')
-            @path = path
+        def initialize(target)
             @dependencies = {}
 
-            parse File.read(@path)
+            parse target
         end
 
         def fixture(modifiers = {})
@@ -39,8 +38,8 @@ module Puppetfiler
         end
 
         private
-        def parse(content)
-            json = JSON.load(content)
+        def parse(target)
+            json = JSON.load(target)
 
             if not json.has_key?('dependencies') or json['dependencies'].eql?([])
                 STDERR.puts "No dependencies in file '#{@path}' found"

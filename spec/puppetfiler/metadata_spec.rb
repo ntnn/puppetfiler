@@ -3,14 +3,10 @@ require 'puppetfiler/metadata'
 
 describe Puppetfiler::Metadata do
     let!(:md) {
-        Puppetfiler::Metadata.new('./data/simple_metadata.json')
+        Puppetfiler::Metadata.new(File.new('./data/simple_metadata.json'))
     }
 
     describe 'initialization / instance variables' do
-        it 'sets the path' do
-            expect(md.path).to eq('./data/simple_metadata.json')
-        end
-
         it 'parses dependencies' do
             expect(md.dependencies)
                 .to eql(
@@ -20,9 +16,14 @@ describe Puppetfiler::Metadata do
                 )
         end
 
-        it 'fails on no dependencies' do
-            expect(Puppetfiler::Metadata.new('./data/metadata_nodeps.json'))
-                .to eql(Puppetfiler::Metadata.new('./data/metadata_emptydeps.json'))
+        {
+            'empty' => './data/metadata_emptydeps.json',
+            'no'    => './data/metadata_nodeps.json',
+        }.each do |mess, file|
+            it "prints a message to stderr on #{mess} dependencies" do
+                expect { Puppetfiler::Metadata.new(File.new(file)) }
+                    .to output('No dependencies found').to_stderr
+            end
         end
     end
 
