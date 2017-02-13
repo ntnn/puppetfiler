@@ -26,26 +26,38 @@ module Puppetfiler
         }
 
         desc 'check', 'Check forge for newer versions of used forge modules'
-        def check()
-            target = target(options)
+        def check
+            t = [nil, nil]
+            %i{puppetfile metadata}.each do |m|
+                if not options[m].nil?
+                    t = [m, options[m]]
+                end
+            end
+            updates = Puppetfiler.check(*t)
 
-            case target[:type]
-            when :puppetfile
-                t = Puppetfiler::Puppetfile.new(target[:result])
-            when :metadata
-                # TODO see below
-                fail 'Checking metadata.json for version range updates is not implemented yet'
-            else fail "Unkown type: #{target[:type]}"
+            if updates.empty?
+                return
             end
 
-            format = "% -#{t.maxlen_name}s  % -#{t.maxlen_ver}s  %s"
+            maxlen_name = 0
+            maxlen_val  = 0
+            val_count   = 0
 
-            puts sprintf(format, 'module', 'current', 'newest')
+            updates.each do |name, hash|
+                maxlen_name = name.length if name.length > maxlen_name
+                hash.each do |k, v|
+                    val_count += 1
+                    maxlen_val = k.length if k.length > maxlen_val
+                    maxlen_val = v.length if v.length > maxlen_val
+                end
+            end
 
-            # TODO the updates should be collected asynchronously to
-            # speed up the process
-            t.updates.each do |name, hash|
-                puts sprintf(format, name, hash[:current], hash[:newest])
+            format = "% -#{maxlen_name}s  " + ( "% -#{maxlen_val}s" * val_count )
+
+            puts sprintf(format, 'module', *updates.first[1].keys)
+
+            updates.each do |name, hash|
+                puts sprintf(format, name, *hash.values)
             end
         end
 
