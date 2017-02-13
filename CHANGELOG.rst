@@ -1,3 +1,10 @@
+v0.2.1
+------
+Cosmetical release
+
+``puppetfiler check`` did not leave spaces between the titles of the
+columns, resulting in unreadable output.
+
 v0.2.0
 ------
 

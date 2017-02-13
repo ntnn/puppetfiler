@@ -39,22 +39,22 @@ module Puppetfiler
                 return
             end
 
+            titles = updates.first[1].keys
+
             maxlen_name = 0
-            maxlen_val  = 0
-            val_count   = 0
+            maxlen_val  = titles.map { |t| t.length }.max
 
             updates.each do |name, hash|
                 maxlen_name = name.length if name.length > maxlen_name
                 hash.each do |k, v|
-                    val_count += 1
                     maxlen_val = k.length if k.length > maxlen_val
                     maxlen_val = v.length if v.length > maxlen_val
                 end
             end
 
-            format = "% -#{maxlen_name}s  " + ( "% -#{maxlen_val}s" * val_count )
+            format = "% -#{maxlen_name}s  " + ( "% -#{maxlen_val}s  " * titles.count )
 
-            puts sprintf(format, 'module', *updates.first[1].keys)
+            puts sprintf(format, 'module', *titles)
 
             updates.each do |name, hash|
                 puts sprintf(format, name, *hash.values)
