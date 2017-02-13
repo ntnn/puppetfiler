@@ -9,12 +9,6 @@
   environment, which'd favor matching against found metaparams below the
   current path
 
-* Building of .fixtures.yml for modules based on the metadata
-  I did something similar on my modulesync config[1], however having it
-  this way and called via a rake task might be favorable
-
-  [1]: https://github.com/ntnn/modulesync-cfg/blob/master/moduleroot/.fixtures.yml
-
 * Mock api calls in aruba tests
   Not as easy as with rspec, see https://github.com/cucumber/aruba/issues/169
   However using arubas in-process execution it is possible to use webmock to mock these calls.
