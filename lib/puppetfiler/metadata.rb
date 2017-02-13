@@ -13,7 +13,7 @@ module Puppetfiler
         end
 
         def fixture(modifiers = {})
-            Puppetfiler.fixture(@dependencies, {}, modifiers)
+            Puppetfiler::Fixture.fixture(@dependencies, {}, modifiers)
         end
 
         def eql?(other)

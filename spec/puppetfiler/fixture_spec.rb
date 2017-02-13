@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Puppetfiler do
+describe Puppetfiler::Fixture do
     let!(:modules) {
         mods = {}
         {
@@ -22,7 +22,7 @@ describe Puppetfiler do
 
     describe '#fixture' do
         it 'returns fixtures as a hash' do
-            expect(Puppetfiler.fixture(modules, @repos))
+            expect(Puppetfiler::Fixture.fixture(modules, @repos))
                 .to eql(
                     {
                         'fixtures' => {
@@ -59,7 +59,7 @@ describe Puppetfiler do
                 },
             }
 
-            expect(Puppetfiler.fixture(modules, @repos, patterns))
+            expect(Puppetfiler::Fixture.fixture(modules, @repos, patterns))
                 .to eql(
                     {
                         'fixtures' => {
@@ -94,7 +94,7 @@ describe Puppetfiler do
 
             repos = { 'goscript' => @repos['goscript'] }
 
-            expect(Puppetfiler.fixture({}, repos, patterns))
+            expect(Puppetfiler::Fixture.fixture({}, repos, patterns))
                 .to eql(
                     {
                         'fixtures' => {

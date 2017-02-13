@@ -59,7 +59,7 @@ module Puppetfiler
         end
 
         def fixture(modifiers = {})
-            Puppetfiler.fixture(@modules, @repos, modifiers)
+            Puppetfiler::Fixture.fixture(@modules, @repos, modifiers)
         end
 
         private
