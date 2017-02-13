@@ -3,6 +3,14 @@ require 'yaml'
 require 'puppetfiler/puppetfile'
 require 'puppetfiler/version'
 
+module SemanticPuppet
+    class Version < Numeric
+        def length
+            to_s.length
+        end
+    end
+end
+
 module Puppetfiler
     class CLI < Thor
         class_option :puppetfile, {
