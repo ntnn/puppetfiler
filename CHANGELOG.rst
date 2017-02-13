@@ -1,4 +1,4 @@
-v0.1.6
+v0.2.0
 ------
 
 Bugfixes
@@ -12,6 +12,9 @@ Changes
   generates the ``.fixtures.yml`` for both environments and modules.
   Additionally it is set as a requirement for the task ``spec_prep``
   from ``puppetlabs_spec_helper``.
+
+- Puppetfiler now has a single calling convention via the core module
+  and figures the target out if none was passed.
 
 v0.1.5
 ------
