@@ -4,7 +4,7 @@ Feature: check
         Given a file named "Puppetfile" does not exist
         Given a file named "metadata.json" does not exist
         When I run `puppetfiler check`
-        Then the output should contain "No Puppetfile or metadata.json found, aborting"
+        Then the output should contain "No valid target found, aborting"
 
     Scenario: Puppetfile in pwd and none passed
         Given a file named "Puppetfile" with:
@@ -50,9 +50,9 @@ Feature: check
         moduledir 'external_modules'
         """
         When I run `puppetfiler check -p path/Puppetfile`
-        Then the output should contain "module"
-        Then the output should contain "current"
-        Then the output should contain "newest"
+        Then the output should contain:
+        """
+        """
 
     Scenario: Specified metadata.json that exists
         Given a file named "path/metadata.json" with:
