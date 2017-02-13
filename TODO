@@ -14,3 +14,9 @@
   this way and called via a rake task might be favorable
 
   [1]: https://github.com/ntnn/modulesync-cfg/blob/master/moduleroot/.fixtures.yml
+
+* Mock api calls in aruba tests
+  Not as easy as with rspec, see https://github.com/cucumber/aruba/issues/169
+  However using arubas in-process execution it is possible to use webmock to mock these calls.
+
+  It is quite ugly though: https://github.com/erikhuda/thor/wiki/Integrating-with-Aruba-In-Process-Runs
