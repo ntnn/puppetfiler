@@ -78,21 +78,5 @@ module Puppetfiler
         def version
             puts "puppetfiler v#{Puppetfiler::VERSION}"
         end
-
-        private
-        def target(opts)
-            {
-                :puppetfile => 'Puppetfile',
-                :metadata   => 'metadata.json',
-            }.each do |sym, str|
-                if opts[sym]
-                    return { :result => opts[sym], :type => sym }
-                elsif File.exists?(str)
-                    return { :result => str, :type => sym }
-                end
-            end
-
-            fail 'No Puppetfile or metadata.json found, aborting'
-        end
     end
 end

@@ -5,15 +5,11 @@ module Puppetfiler
         attr :modules
         attr :repos
         attr :puppetfile
-        attr :maxlen_name
 
         def initialize(path = 'Puppetfile')
             @modules    = {}
             @repos      = {}
             @puppetfile = path
-
-            @maxlen_name = 0
-            @maxlen_ver  = 0
 
             self.evaluate
         end
@@ -34,10 +30,6 @@ module Puppetfiler
                 STDERR.puts error
                 return nil
             end
-        end
-
-        def maxlen_ver
-            [@maxlen_ver, 'current'.length].max
         end
 
         def updates
@@ -75,8 +67,6 @@ module Puppetfiler
 
                 @modules[name] = Puppetfiler::Mod.new(:name => name, :version => arg)
 
-                @maxlen_name = name.length if name.length > @maxlen_name
-                @maxlen_ver  = arg.length if arg.length > @maxlen_ver
             else args.is_a?(Hash)
 
                 @repos[name] = {}
