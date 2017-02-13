@@ -63,24 +63,15 @@ module Puppetfiler
 
         desc 'fixture', 'Create puppetlabs_spec_helper compatible .fixtures.yml from puppetfile or metadata.json'
         method_option :stdout, :aliases => '-o'
-        def fixture()
-            target = target(options)
-
-            case target[:type]
-            when :puppetfile
-                f = Puppetfiler::Puppetfile.new(target[:result])
-            when :metadata
-                f = Puppetfiler::Metadata.new(File.new(target[:result]))
-            else fail "Unkown type: #{target[:type]}"
+        def fixture
+            t = [nil, nil]
+            %i{puppetfile metadata}.each do |m|
+                if not options[m].nil?
+                    t = [m, options[m]]
+                end
             end
 
-            f = f.fixture.to_yaml
-
-            if options[:stdout]
-                puts f
-            else
-                File.write('.fixtures.yml', f)
-            end
+            Puppetfiler.fixture(*t, {}, options[:stdout])
         end
 
         desc 'version', 'Output version'
