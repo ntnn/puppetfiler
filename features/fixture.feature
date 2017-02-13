@@ -54,7 +54,6 @@ Feature: fixture
         """
         When I run `puppetfiler fixture -o`
         Then the output should contain:
-        # TODO I have no clue why this fails.
         """
         ---
         fixtures:

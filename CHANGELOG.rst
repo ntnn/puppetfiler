@@ -1,3 +1,11 @@
+v0.1.6
+------
+
+Bugfixes
+~~~~~~~~
+- ``Puppetfiler::Mod`` now correctly checks for the symbolized member
+  'version_requirement' of metadata.json entries.
+
 v0.1.5
 ------
 
