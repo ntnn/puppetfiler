@@ -27,8 +27,13 @@ Installation
 Usage
 =====
 
-If no Puppetfile has been specified puppetfiler uses the Puppetfile in
-the current directory.
+A puppetfile can be specified via ``-p path/to/pf`` or ``--puppetfile path/to/pf``,
+a metadata file via ``-m path/to/metadata.json`` or ``--metadata
+path/to/metadata.json``.
+
+If neither are specified ``puppetfiler`` will check for a file named
+``Puppetfile`` in the current working directory first, then for a file
+named ``metadata.json``.
 
 check
 -----
@@ -46,8 +51,7 @@ to be queried from the forge.
 
 fixture
 -------
-Create puppetlabs_spec_helper_ compatible ``.fixtures.yml`` from
-Puppetfile.
+Create puppetlabs_spec_helper_ compatible ``.fixtures.yml``.
 
 .. code:: sh
 
