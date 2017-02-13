@@ -72,23 +72,32 @@ Create puppetlabs_spec_helper_ compatible ``.fixtures.yml``.
 Gerating .fixture.yml when executing rake tasks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Without modifying the result:
+
+.. code:: ruby
+
+    require 'puppetfiler/rake_tasks'
+
+Which adds the task ``fixture``, which is equivalent to runnning
+``puppetfiler fixture``.
+
+With modifying the result:
+
 .. code:: ruby
 
     require 'puppetfiler'
 
     desc 'Generate .fixtures.yml'
-    task :fixtures do
-        pf = Puppetfiler::Puppetfile.new('Puppetfile')
-        fixtures = pf.fixture(
-            {
-                'forge_modules' => {
-                    /.*/ => {
-                        'flags' => '--module_repository https://inhouse.forge.lan/',
-                    },
+    task :fixture do
+        modifier = {
+            'forge_modules' => {
+                /.*/ => {
+                    'flags' => '--module_repository https://inhouse.forge.lan/',
                 },
             },
-        )
-        File.write('.fixtures.yml', fixtures.to_yaml)
+        }
+
+        Puppetfiler.fixture(modifier)
     end
 
     task :spec => [:fixtures]

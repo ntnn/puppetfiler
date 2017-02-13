@@ -6,6 +6,13 @@ Bugfixes
 - ``Puppetfiler::Mod`` now correctly checks for the symbolized member
   'version_requirement' of metadata.json entries.
 
+Changes
+~~~~~~~
+- ``puppetfiler/rake_task`` adds the rake task ``fixture``, which
+  generates the ``.fixtures.yml`` for both environments and modules.
+  Additionally it is set as a requirement for the task ``spec_prep``
+  from ``puppetlabs_spec_helper``.
+
 v0.1.5
 ------
 
