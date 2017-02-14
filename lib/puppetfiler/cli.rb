@@ -2,9 +2,18 @@ require 'thor'
 require 'yaml'
 require 'puppetfiler/puppetfile'
 require 'puppetfiler/version'
+require 'semantic_puppet'
 
 module SemanticPuppet
     class Version < Numeric
+        def length
+            to_s.length
+        end
+    end
+end
+
+module SemanticPuppet
+    class VersionRange < Range
         def length
             to_s.length
         end
