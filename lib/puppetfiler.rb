@@ -34,8 +34,8 @@ module Puppetfiler
         when :puppetfile
             t = Puppetfiler::Puppetfile.new(target)
         when :metadata
-            # TODO see below
-            fail 'Checking metadata.json for version range updates is not implemented yet'
+            fail "File '#{target}' does not exist, aborting" if not File.exists?(target)
+            t = Puppetfiler::Metadata.new(File.new(target))
         else fail "Unkown type: #{type}"
         end
 

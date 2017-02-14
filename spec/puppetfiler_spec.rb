@@ -83,13 +83,10 @@ describe Puppetfiler do
 
         context 'metadata' do
             let!(:check) {
+                Puppetfiler.check(:metadata, 'data/simple_metadata.json')
             }
 
-            it do
-                expect {
-                    Puppetfiler.check(:metadata, 'data/simple_metadata.json')
-                }.to raise_error(/Checking metadata.json.*not implement/)
-            end
+            it { expect(check).to_not be nil }
         end
     end
 

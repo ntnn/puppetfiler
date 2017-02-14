@@ -32,7 +32,9 @@ Feature: check
         }
         """
         When I run `puppetfiler check`
-        Then the output should contain "Checking metadata.json for version range updates is not implemented yet"
+        Then the output should contain:
+        """
+        """
 
     Scenario: Specified Puppetfile that does not exist
         Given a file named "path/Puppetfile" does not exist
@@ -42,7 +44,7 @@ Feature: check
     Scenario: Specified metadata.json that does not exist
         Given a file named "path/metadata.json" does not exist
         When I run `puppetfiler check -m path/metadata.json`
-        Then the output should contain "Checking metadata.json for version range updates is not implemented yet"
+        Then the output should contain "File 'path/metadata.json' does not exist, aborting"
 
     Scenario: Specified Puppetfile that exists
         Given a file named "path/Puppetfile" with:
@@ -58,11 +60,16 @@ Feature: check
         Given a file named "path/metadata.json" with:
         """
         {
-            "dependencies": []
+            "dependencies": [
+                {
+                    "name": "puppetlabs/stdlib",
+                    "version_requirement": ">= 4.13.0 < 4.14.0"
+                }
+            ]
         }
         """
         When I run `puppetfiler check -m path/metadata.json`
-        Then the output should contain "Checking metadata.json for version range updates is not implemented yet"
+        Then the output should contain "puppetlabs/stdlib"
 
     Scenario: Puppetfile that is malformed
         Given a file named "Puppetfile" with:
