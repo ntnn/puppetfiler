@@ -14,3 +14,5 @@
   However using arubas in-process execution it is possible to use webmock to mock these calls.
 
   It is quite ugly though: https://github.com/erikhuda/thor/wiki/Integrating-with-Aruba-In-Process-Runs
+
+* Check if the version and dependency settings are valid in context
