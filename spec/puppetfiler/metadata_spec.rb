@@ -47,4 +47,29 @@ describe Puppetfiler::Metadata do
                 )
         end
     end
+
+    describe '#updates' do
+        context 'no updates' do
+            it { expect(md.updates).to_not be nil }
+            it { expect(md.updates).to eql({}) }
+        end
+
+        context 'with updates' do
+            let(:md) do
+                Puppetfiler::Metadata
+                    .new(File.new('./data/metadata_outdated.json'))
+            end
+            let(:result) do
+                {
+                    'puppetlabs/stdlib' => {
+                        :range  => SemanticPuppet::VersionRange.parse('>= 4.13.0 < 4.14.0'),
+                        :newest => SemanticPuppet::Version.parse('4.15.0'),
+                    }
+                }
+            end
+
+            it { expect(md.updates).to_not be nil }
+            it { expect(md.updates) .to eql(result) }
+        end
+    end
 end

@@ -20,6 +20,29 @@ module Puppetfiler
             @dependencies.eql?(other.dependencies)
         end
 
+        def updates
+            require 'concurrent'
+
+            updates = {}
+
+            deps = @dependencies.map do |name, dep|
+                Concurrent::Future.execute do
+                    latest = dep.latest
+
+                    if not dep.range.cover?(latest)
+                        updates[name] = {
+                            :range  => dep.range,
+                            :newest => latest,
+                        }
+                    end
+                end
+            end
+
+            deps.each { |f| f.wait_or_cancel(300) }
+
+            return updates
+        end
+
         private
         def parse(target)
             json = JSON.load(target)
