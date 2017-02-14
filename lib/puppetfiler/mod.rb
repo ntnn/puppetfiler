@@ -16,7 +16,7 @@ module Puppetfiler
             @name = args[:name]
             @slug = @name.gsub('/', '-')
 
-            @forge = PuppetForge::Module.find(@slug)
+            @forge = nil
 
             @range = nil
             %i{range version_requirement}.each do |v|
@@ -34,6 +34,10 @@ module Puppetfiler
                 @version = SemanticPuppet::Version.parse(args[v]) if args.has_key?(v)
             end
             @version = latest_valid if not @version
+        end
+
+        def forge
+            return @forge ||= PuppetForge::Module.find(@slug)
         end
 
         def eql?(other)
@@ -58,7 +62,7 @@ module Puppetfiler
         end
 
         def latest
-            return SemanticPuppet::Version.parse(@forge.current_release.version)
+            return SemanticPuppet::Version.parse(forge.current_release.version)
         end
 
         def valid_versions
@@ -66,7 +70,7 @@ module Puppetfiler
 
             versions = []
 
-            @forge.releases.each do |release|
+            forge.releases.each do |release|
                 version = SemanticPuppet::Version.parse(release.version)
                 versions << version if @range.cover?(version)
             end
