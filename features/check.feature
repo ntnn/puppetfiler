@@ -82,5 +82,5 @@ Feature: check
             "dependencies": [
         }
         """
-        When I run `puppetfiler check -m path/metadata.json`
-        Then the output should contain "Checking metadata.json for version range updates is not implemented yet"
+        When I run `puppetfiler check -m metadata.json`
+        Then the output should contain "Passed metadata is invalid"

@@ -45,7 +45,13 @@ module Puppetfiler
 
         private
         def parse(target)
-            json = JSON.load(target)
+            begin
+                json = JSON.load(target)
+            rescue JSON::ParserError => error
+                STDERR.puts 'Passed metadata is invalid:'
+                STDERR.puts error
+                return nil
+            end
 
             if not json.has_key?('dependencies') or json['dependencies'].eql?([])
                 warn 'No dependencies found'
