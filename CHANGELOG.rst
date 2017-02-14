@@ -5,6 +5,8 @@ Changes
 ~~~~~~~
 - ``Puppetfiler::Puppetfile#updates`` uses the ``concurrent-ruby`` gem,
   shortening the execution time immensely.
+- ``Puppetfiler::Metadata#updates`` has been added and is also exposed
+  via ``puppetfiler check``.
 
 v0.2.1
 ------

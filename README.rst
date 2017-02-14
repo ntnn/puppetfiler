@@ -38,6 +38,10 @@ named ``metadata.json``.
 check
 -----
 Check puppet forge for newer versions of used forge modules.
+For Puppetfiles the currently set version on newest on the forge are
+compared.
+For metadata.json puppetfiler checks that the newest version on the
+forge is covered by the range constraint.
 
 .. code:: sh
 
