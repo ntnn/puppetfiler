@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'semantic_puppet', '~> 0.1.4'
   spec.add_dependency 'thor', '~> 0.19.4'
   spec.add_dependency 'hashie', '~> 3.5'
+  spec.add_dependency 'concurrent-ruby', '~> 1.0'
 end

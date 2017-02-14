@@ -39,8 +39,6 @@ module Puppetfiler
         else fail "Unkown type: #{type}"
         end
 
-        # TODO the updates should be collected asynchronously to
-        # speed up the process
         return t.updates
     end
 

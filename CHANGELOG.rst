@@ -1,3 +1,11 @@
+v
+------
+
+Changes
+~~~~~~~
+- ``Puppetfiler::Puppetfile#updates`` uses the ``concurrent-ruby`` gem,
+  shortening the execution time immensely.
+
 v0.2.1
 ------
 Cosmetical release

@@ -33,19 +33,27 @@ module Puppetfiler
         end
 
         def updates
+            require 'concurrent'
+
             updates = {}
 
-            @modules.each do |name, mod|
-                current = mod.version
-                newest = mod.latest
+            mods = @modules.map do |name, mod|
+                Concurrent::Future.execute do
+                    current = mod.version
+                    newest = mod.latest
 
-                if not newest.eql?(current)
-                    updates[name] = {
-                        :current => current,
-                        :newest  => newest,
-                    }
+                    if not newest.eql?(current)
+                        updates[name] = {
+                            :current => current,
+                            :newest  => newest,
+                        }
+                    end
                 end
             end
+
+            # A timeout of 300 seconds per job should be plenty
+            # TODO configurable timeout
+            mods.each { |f| f.wait_or_cancel(300) }
 
             return updates
         end
